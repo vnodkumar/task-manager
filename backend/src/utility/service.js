@@ -20,13 +20,13 @@ export async function InsertTask(title,description,status){
     const query=`INSERT INTO tasks(title,description) VALUES(?,?,?)`
     const values=[title]
     if(description)
-        values.add(description)
+        values.push(description)
     else
-        values.add(null)
+        values.push(null)
     if(status)
-        values.add(status)
+        values.push(status)
     else
-        values.add(null)
+        values.push(null)
     const result= await db.run(query,values)
     const task=await getTaskById(result.lastID)
     return task

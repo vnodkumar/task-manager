@@ -1,6 +1,7 @@
 import { getAllTask,getTaskById,InsertTask,DeleteTask,UpdateTask } from "../utility/service.js";
+
 export async function sendTask(req,res){
-    if(req.params.id){
+    try{if(req.params.id){
         const task=await getTaskById(req.params)
         if(task)
             res.status(200).json(task)
@@ -10,45 +11,49 @@ export async function sendTask(req,res){
     else{
         const alltask=await getAllTask()
         res.status(200).json(alltask)
+    }}
+    catch(err){
+        console.log(err)
+        res.status(500).json({error:"Failed to get task"})
     }
 }
 
 export async function createTask(req,res){
-    const {title,description,status}=req.query
-    console.log(typeof title)
-    if(typeof title!=="string"||typeof description!=="string"){
-        res.json({msg:"only string formate is accepted"})
-    }
-    else if(title){
+    
+    try{
+        const {title,description,status}=req.query
         const taskInserted=await InsertTask(title,description,status)
         res.status(201).json(taskInserted)
     }
-    else{
-        res.json("Title is required")
+    catch(err){
+        console.log(err)
+        res.status(500).json({error:'Failed to create task'})
     }
+    
 
 }
 export async function updateTask(req,res){
-    const {id}=req.params
-    if(id){
+    
+    try{
+        const {id}=req.params
         const updatedtask=await UpdateTask(id,req.query)
-        if(updateTask){
-            res.status(200).json(updatedtask)
-        }
-        else{
-            res.json('nothing to change')
-        }
+        res.status(200).json(updatedtask)
     }
-    else{
-        res.status(404).json('provide id')
+    catch(err){
+        console.log(err)
+        res.status(500).json({error:"Failed to update task"})
     }
+    
 }
 export async function deleteTask(req,res){
-    const {id}=req.params
-    const task=getTaskById(id)
-    const changes =await DeleteTask(id)
-    if(changes)
-        res(204).end()
-    else
-        res.status(404).json(`Task with id ${id} not found`)
+    try{    
+        const {id}=req.params
+        const task=getTaskById(id)
+        const changes =await DeleteTask(id)
+        res.status(204).json('succesful')
+    }
+    catch(err){
+        console.log(err)
+        res.status(500).json({error:'Failed to delete task'})
+    }
 }  
