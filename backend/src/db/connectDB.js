@@ -3,9 +3,15 @@ import {open} from 'sqlite'
 import path from 'node:path'
 
 export async function connectDB(){
-    const db=await open({
-    filename:path.join('database.db'),
-    driver:sqlite3.Database
-    })
-    return db
+    try{
+        const db=await open({
+        filename:path.join('database.db'),
+        driver:sqlite3.Database
+        })
+        return db
+    }
+    catch(err){
+        console.error("❌ Failed to connect to database:", err.message);
+        throw err;
+    }
 }
