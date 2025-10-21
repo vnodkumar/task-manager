@@ -40,7 +40,7 @@ appRouter.put('/tasks/:id',async(req,res)=>{
     try{
         const {id}=req.params
         const payload=req.body
-        if(!payload||Objects.keys(payload).length===0) res.status(400).json({error:"no fields provided to update"})
+        if(!payload||Object.keys(payload).length===0) res.status(400).json({error:"no fields provided to update"})
         const updatedtask=await UpdateTask(id,payload)
         if(!updatedtask) res.status(400).json({error:"Task not found or nothing to update"})
         res.status(200).json(updatedtask)
