@@ -63,7 +63,7 @@ export default function TasksPage() {
 
   return (
     <div>
-      <section className="bg-white rounded-lg shadow-sm p-6 mb-6">
+      <section className="bg-white rounded-lg shadow-lg p-6 mb-6">
         <h2 className="text-lg font-medium mb-4">Create Task</h2>
         <TaskForm
           key={editing ? editing.id : "create"}
@@ -77,7 +77,7 @@ export default function TasksPage() {
         />
       </section>
 
-      <section className="bg-white rounded-lg shadow-sm p-6 mb-6">
+      <section className="bg-white rounded-lg shadow-lg p-6 mb-6">
         <h2 className="text-lg font-medium mb-4"> Task</h2>
         {loading ? <Loader /> : null}
         {error ? <div className="error">{error}</div> : null}

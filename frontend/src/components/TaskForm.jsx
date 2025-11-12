@@ -46,16 +46,16 @@ export default function TaskForm({ initialValues, onSubmit, onCancel, mode = "cr
   return (
     <form className="space-y-4" onSubmit={handleSubmit}>
       <div>
-        <label className="block text-sm font-medium text-slate-700">Title</label>
-        <input className="mt-1 block w-full rounded-md border-gray-200 shadow-sm focus:ring-2 focus:ring-indigo-300 focus:border-indigo-500" value={title} onChange={e => setTitle(e.target.value)} disabled={submitting} />
+        <label className="block text-2xl  font-medium text-slate-700">Title</label>
+        <input className="mt-1 block w-full h-10 text-lg px-3 rounded-md border-gray-200 shadow-sm focus:ring-2 focus:ring-indigo-300 focus:border-indigo-500" value={title} onChange={e => setTitle(e.target.value)} disabled={submitting} />
       </div>
       <div>
-        <label>Description</label>
-        <textarea className="mt-1 block w-full rounded-md border-gray-200 shadow-sm" value={description} onChange={e => setDescription(e.target.value)} disabled={submitting} />
+        <label className="text-2xl">Description</label>
+        <textarea className="mt-1 block w-full text-lg rounded-md p-3 border-gray-200 shadow-sm" value={description} onChange={e => setDescription(e.target.value)} disabled={submitting} />
       </div>
       <div>
-        <label className="block text-sm font-medium text-slate-700">Description</label>
-        <select className="mt-1 block w-full rounded-md border-gray-200" value={status} onChange={e => setStatus(e.target.value)} disabled={submitting}>
+        <label className="block text-2xl font-medium text-slate-700">Status</label>
+        <select className="mt-1 block w-full text-lg  rounded-md border-gray-200" value={status} onChange={e => setStatus(e.target.value)} disabled={submitting}>
           {statuses.map(s => <option key={s} value={s}>{s}</option>)}
         </select>
       </div>

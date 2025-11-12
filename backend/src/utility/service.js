@@ -2,6 +2,15 @@ import {connectDB} from '../db/connectDB.js'
 
 
 const db=await connectDB()
+await db.exec(`
+    CREATE TABLE IF NOT EXISTS tasks(
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        title TEXT NOT NULL,
+        description TEXT,
+        status TEXT DEFAULT 'pending',
+        created_at TEXT DEFAULT CURRENT_TIMESTAMP
+    )
+`);
 export async function getAllTask(){
     try{
         const query=`SELECT * FROM tasks;`
